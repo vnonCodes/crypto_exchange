@@ -23,13 +23,17 @@ class App extends Component {
     const ethBalance = await web3.eth.getBalance(this.state.account)
     this.setState({ ethBalance })
 
+    // Load Token
     const abi = Token.abi
     const networkId = await web3.eth.net.getId()
     const tokenData = Token.networks[networkId]
     if(tokenData) {
       const address = tokenData.address
       const token = new web3.eth.Contract(abi, address)
-      console.log(token)  
+      this.setState({ token })
+      let tokenBalance = await token.methods.balanceOf(this.state.account).call()
+      console.log("tokenBalance", tokenBalance.toString())
+      this.setState({ tokenBalance: tokenBalance.toString() })
     } else {
       window.alert('Token contract not deployed to detected')
     }
@@ -53,7 +57,9 @@ class App extends Component {
     super(props)
     this.state = { 
       account: '',
-      ethBalance: '0'
+      token: {},
+      ethBalance: '0',
+      tokenBalance: '0' 
     }
   }
 
