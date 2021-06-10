@@ -3,7 +3,7 @@ import Web3 from 'web3'
 import Token from '../abis/Token.json'
 import EthSwap from '../abis/EthSwap.json'
 import Navbar from './Navbar'
-
+import Main from './Main'
 import './App.css'
 
 class App extends Component {
@@ -35,8 +35,19 @@ class App extends Component {
       console.log("tokenBalance", tokenBalance.toString())
       this.setState({ tokenBalance: tokenBalance.toString() })
     } else {
-      window.alert('Token contract not deployed to detected')
+      window.alert('Token contract not deployed to detected.')
     }
+
+    // Load EthSwap
+    const ethSwapData = EthSwap.networks[networkId]
+    if(ethSwapData) {
+      const ethSwap = new web3.eth.Contract(EthSwap.abi, ethSwapData.address)
+      this.setState({ ethSwap })
+    } else {
+      window.alert('EthSwap contract not deployed to detected.')
+    }
+    
+    console.log(this.state.ethSwap)
 
   }
 
@@ -58,6 +69,7 @@ class App extends Component {
     this.state = { 
       account: '',
       token: {},
+      ethSwap: {},
       ethBalance: '0',
       tokenBalance: '0' 
     }
@@ -77,7 +89,7 @@ class App extends Component {
                   rel="noopener noreferrer"
                 >
                 </a>
-                <h1>Hello, World!</h1>
+                <Main />
               </div>
             </main>
           </div>
