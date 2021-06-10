@@ -51,6 +51,13 @@ contract( 'EthSwap', ([deployer, investor]) => {
             // Check investor token balance after purchase
             let investorBalance = await token.balanceOf(investor)
             assert.equal(investorBalance.toString(), tokens('100'))
+            
+            // Check ethSwap balance after purchase
+            let ethSwapBalance
+            ethSwapBalance =  await token.balanceOf(ethSwap.address)
+            assert.equal(ethSwapBalance.toString(), tokens('999900'))
+            ethSwapBalance = await web3.eth.getBalance(ethSwap.address)
+            assert.equal(ethSwapBalance.toString(), web3.utils.toWei('1', 'Ether'))
         })
     })
 
