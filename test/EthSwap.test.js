@@ -37,4 +37,10 @@ contract( 'EthSwap', (accounts) => {
         })
     })
 
+    describe('buyTokens()', async () => {
+        it('Allows user to instantly purchase tokens from ethSwap for a fixed price', async () => {
+            await ethSwap.buyTokens({ from: accounts[1], value: '1000000000000000000'})
+        })
+    })
+
 })

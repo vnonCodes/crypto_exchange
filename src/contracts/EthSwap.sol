@@ -11,7 +11,7 @@ contract EthSwap {
         token = _token;
     }
 
-    function buytokens() public payable {
+    function buyTokens() public payable {
         // Calculate the number of tokens to buy
         uint tokenAmount = msg.value * rate;
         token.transfer(msg.sender, tokenAmount);
