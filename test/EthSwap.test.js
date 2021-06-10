@@ -67,4 +67,20 @@ contract( 'EthSwap', ([deployer, investor]) => {
         })
     })
 
+    describe('sellTokens()', async () => {
+        let result
+
+        before(async () => {
+            // Investor must approve tokens before the purchase
+            await token.approve(ethSwap.address, tokens('100'), { from: investor })
+            // Investor sells tokens
+            result = await ethSwap.sellTokens(tokens('100'), { from: investor })
+        })
+
+        it('Allows user to instantly sell tokens to ethSwap for a fixed price', async () => {
+
+        })
+    })
+
+
 })
