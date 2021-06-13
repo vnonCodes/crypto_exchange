@@ -25,7 +25,7 @@ class Navbar extends Component {
                     className="ml-2"
                     width='30'
                     height='30'
-                    src={'data:image/png;base64,${new Identicon(this.props.account, 30).toString()}'}
+                    src={'data:image/png;base64,new Identicon(this.props.account, 30).toString()'} // Issues retrieving identicon due to base64 encoding via ARM/M1 architecture
                     alt=""
                     />
                     : <span></span>
